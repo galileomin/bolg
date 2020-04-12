@@ -9,7 +9,7 @@
                     <span class="sub">副标题</span>
                     <div  class="into">
                     <input type="button" value="进入" @click="intoInfo(item.id)">
-                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true">&nbsp;1</span>
+                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" style="padding-right:0">&nbsp;1</span>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <span class="glyphicon glyphicon-comment" aria-hidden="true">&nbsp;1</span>
                      </div>
@@ -23,7 +23,7 @@
                     <span class="sub">副标题</span>
                     <div  class="into">
                     <input type="button" value="进入" @click="intoInfo(item.id)">
-                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true">&nbsp;1</span>
+                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" style="padding-right:0">&nbsp;1</span>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <span class="glyphicon glyphicon-comment" aria-hidden="true">&nbsp;1</span>
                      </div>
@@ -37,7 +37,7 @@
                     <span class="sub">副标题</span>
                     <div  class="into">
                     <input type="button" value="进入" @click="intoInfo(item.id)">
-                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true">&nbsp;1</span>
+                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" style="padding-right:0">&nbsp;1</span>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <span class="glyphicon glyphicon-comment" aria-hidden="true">&nbsp;1</span>
                      </div>

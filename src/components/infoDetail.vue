@@ -88,7 +88,8 @@ export default {
     }
     .btncon{
         display: flex;
-        width: 80%;
+        max-width: 1000px;
+        width: 70%;
         justify-content:space-between;
         margin: auto;
         margin-bottom: 40px;
