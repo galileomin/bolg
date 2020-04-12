@@ -48,8 +48,6 @@ export default {
         padding: 0;
         margin: 0;
         text-align: center;
-        
- 
         img{
             max-width: 100%;
             max-height: 500px;
@@ -79,7 +77,7 @@ export default {
     .toTop{
         position: fixed;
         top: 90%;
-        left: 90%;
+        left: 93%;
         border-radius: 25px;
         outline: none;
         border: 0;
@@ -93,6 +91,7 @@ export default {
         width: 80%;
         justify-content:space-between;
         margin: auto;
+        margin-bottom: 40px;
         button{
             margin-top: 50px;
             border: 0;
@@ -111,5 +110,6 @@ export default {
     .show{
         width: 80%;
         margin: auto;
+        
     }
 </style>

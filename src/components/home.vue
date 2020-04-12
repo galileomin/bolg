@@ -48,7 +48,7 @@
   <!-- new -->
     <div class="container" style="margin-top:30px;" >
       <div class="row">
-    <div class="col-lg-4  col-xs-12" v-for="item in newInfoList" :key="item.id">
+    <div class="col-lg-4  col-xs-12 col-md-4 " v-for="item in newInfoList" :key="item.id">
         <div class="newinfo" >
           <img :src="item.src" alt="">
           <span class="kind">{{item.kind}}</span>
