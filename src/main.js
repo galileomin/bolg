@@ -1,5 +1,5 @@
 import Vue from "vue"
-import  jQuery from 'jquery'
+import  $ from 'jquery'
 import app from "./app.vue"
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
@@ -13,3 +13,7 @@ var vm =new Vue({
     render:c=>c(app),
     router
 })
+const VueRouterPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(to){
+    return VueRouterPush.call(this,to).catch(err =>err)
+}

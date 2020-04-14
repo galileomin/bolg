@@ -44,31 +44,19 @@
         </div>
       </div>
     </div>
+      <show></show>
   </div>
+  <toTop></toTop>
   <!-- new -->
-    <div class="container" style="margin-top:30px;" >
-      <div class="row">
-    <div class="col-lg-4  col-xs-12 col-md-4 " v-for="item in newInfoList" :key="item.id">
-        <div class="newinfo" >
-          <img :src="item.src" alt="">
-          <span class="kind">{{item.kind}}</span>
-          <span class="title">{{item.title}}</span>
-           <span class="sub">{{item.sub}}</span>
-          <div  class="into">
-              <input type="button" value="进入" @click="intoInfo(item.id)">
-              <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true">&nbsp;{{item.like}}</span>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <span class="glyphicon glyphicon-comment" aria-hidden="true">&nbsp;{{item.comment}}</span>
-          </div>
-        </div>
-    </div>
-      </div>
-  </div>
+
+
     </div>
 </template>
 
 
 <script>
+import show from './sub/show.vue'
+import toTop from './sub/toTop.vue'
 $(function(){ 
   $('.carousel').carousel({
 		interval: 4000
@@ -78,7 +66,6 @@ export default {
     data() {
       return {
         newInfoList:[],
-        test:[],
       }
     },
     methods:{
@@ -89,13 +76,16 @@ export default {
       },
       intoInfo(id){
         this.$router.push({path:'/infoDetail/'+id})
-        console.log(id);
-        
+        console.log(id);      
       }
     },
     created() {
       this.getnewInfoList()
     },
+    components:{
+      'show':show,
+      'toTop':toTop
+    }
 }
 </script>
 
@@ -159,61 +149,7 @@ export default {
         }
       }
     }
-    // new
-    .newinfo{
-      border-radius: 7px;
-      background-color: white;
-      height: 400px;
-      position: relative;
-      img{
-        width: 100%;
-        height: 50%;
-      }
-      .kind{
-        margin-top: 5px;
-        color: red;
-        margin-left: 14px;
-        font-size: 10px;
-        display: block;
-        margin-bottom: 10px;
-      }
-      .title{
-        font-weight: bolder;
-        margin-left: 14px;
-        font-size: 16px;
-        display: block;
-        margin-bottom: 10px;
-      }
-      .sub{
-        margin-left: 14px;
-        display: block;
-        margin-bottom: 10px;
-      }
-      .into{
-        background-color: brown;
-        height: 60px;
-        border-radius: 7px;
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        input{
-          height: 100%;
-          width: 50%;
-          border-radius: 7px;
-          border: 0;
-          background-color: rgba(0,0,0,0.1);
-          outline: none;
-          color: white;
-          font-size: 18px;
-          margin-right: 30px;
-        }
-        input:hover{
-          background-color: rgba(0,0,0,0.3);
-        }
-        span{
-          color: white;
-        }
-      }
-    }
-
+.show{
+  width: 100%;
+}
 </style>
