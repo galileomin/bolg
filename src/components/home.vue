@@ -45,9 +45,11 @@
       </div>
     </div>
       <show></show>
+      <infoxs style="width:100%" :title="infoName"></infoxs>
   </div>
+
   <toTop></toTop>
-  <!-- new -->
+  <!-- 资讯 -->
 
 
     </div>
@@ -57,6 +59,7 @@
 <script>
 import show from './sub/show.vue'
 import toTop from './sub/toTop.vue'
+import infoxs  from './sub/info_xs.vue'
 $(function(){ 
   $('.carousel').carousel({
 		interval: 4000
@@ -66,6 +69,7 @@ export default {
     data() {
       return {
         newInfoList:[],
+        infoName:'资讯',
       }
     },
     methods:{
@@ -84,7 +88,8 @@ export default {
     },
     components:{
       'show':show,
-      'toTop':toTop
+      'toTop':toTop,
+      'infoxs':infoxs
     }
 }
 </script>
@@ -149,7 +154,4 @@ export default {
         }
       }
     }
-.show{
-  width: 100%;
-}
 </style>

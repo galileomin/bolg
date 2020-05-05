@@ -7,7 +7,6 @@
             <h4 style="text-align:left;font-weight:bolder" >{{infoDetail.sub}}</h4>
             <div class="article" v-html="infoDetail.article">
             </div>
-
         </div>
          <div class="btncon">
              <button><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0</button>
@@ -15,6 +14,8 @@
          </div>
          <show class="show"></show>
         <toTop></toTop>
+        <comment :id="id"></comment>
+        <div class="test"></div>
     </div>
     
 </template>
@@ -117,5 +118,10 @@ export default {
         .text{
             width: 90%;
         }
+    }
+    .test{
+        background-color: #eee;
+        width: 100%;
+        height: 100px;
     }
 </style>

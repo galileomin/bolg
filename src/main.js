@@ -5,8 +5,12 @@ import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/js/bootstrap.min.js"
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+Vue.use(ElementUI)
 Vue.use(VueRouter)
 Vue.use(VueResource)
+
 import router from './route.js'
 var vm =new Vue({
     el:".app",

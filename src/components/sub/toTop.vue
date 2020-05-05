@@ -16,6 +16,7 @@ export default {
 
 <style lang="scss" scoped>
 button{
+        z-index: 99;
         position: fixed;
         top: 90%;
         left: 93%;

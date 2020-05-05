@@ -47,13 +47,15 @@ export default {
 <style lang="scss" scoped>
 .container{
    width: 100%;
-   padding-bottom: 100px;
+
    background-color:#eee;
    padding-left: 0;
    padding-right: 0;
 }
 // 大屏幕
 @media screen and (min-width:992px){
+.container{
+       padding-bottom: 80px;}
  .row{
     max-width: 1200px;
     margin: auto;
@@ -111,6 +113,8 @@ export default {
 }
 // 小屏幕
 @media screen and (max-width:992px){
+.container{
+       padding-bottom: 50px;}
 .row{
     margin: auto;
     display: flex;
