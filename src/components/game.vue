@@ -1,10 +1,22 @@
 <template>
-<div class="container">
-    <el-button type="success" round class="start" @click="start">开始游戏</el-button>
-    <div class="board">
+<div class="container" >
+    <div class="board " v-if="!failFlag" >
+    <el-button type="success" round class="start" @click="start" v-if="!pauseButton">开始游戏</el-button>
+    <el-button type="success" round class="stop" @click="pause" v-if="pauseButton">暂停</el-button>
+    <span id="score">分数：{{score}}</span>        
         <div v-for="(i,index) in 20" :key="index">
             <div class="commonGrid" v-for="(j,index) in 20" ref="grid" :key="index"></div>
         </div>
+    </div>
+    <div v-else class="failBox">
+        <img src='https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2872222233,2453972241&fm=26&gp=0.jpg'/>
+        <el-button type="info" round class="again" @click="again">再来一遍</el-button>       
+    </div>
+    <div class="controlBox hidden-lg hidden-md">
+        <el-button type="primary" icon="el-icon-caret-left" @click="toLeft" id="left"></el-button>
+        <el-button type="primary" icon="el-icon-caret-top" @click="toUp" id="top"></el-button>
+        <el-button type="primary" icon="el-icon-caret-right" @click="toRight" id="right"></el-button>
+        <el-button type="primary" icon="el-icon-caret-bottom" @click="toBottom"  id="bottom"></el-button>
     </div>
 </div>
 </template>
@@ -18,7 +30,8 @@ export default {
             dir:'right',
             moveTimer:null,
             dirTimer:null,
-            score:0
+            score:0,
+            failFlag:false
         }
     },
     created() {
@@ -73,6 +86,7 @@ export default {
             this.dirTimer = this.changeDir()
             
         },
+
         setTimer:function(){
             return setInterval(()=>{
                 let newRow = null;
@@ -114,6 +128,7 @@ export default {
                 if(!this.judgeBall()){
                     const delItem = this.snake.pop();
                     this.$refs.grid[delItem.row * 20 + delItem.column].setAttribute("class","commonGrid")
+                    this.judgeFail()
                     this.mountSnake()
                 }
             },200)
@@ -146,37 +161,174 @@ export default {
                 }
             })
             return flag
+        },
+        //游戏失败
+        judgeFail:function(){
+            for(let i = 1;i<this.snake.length;i++){
+                if(this.snake[0].row ===this.snake[i].row && this.snake[0].column ===this.snake[i].column){
+                    this.fail()
+                    return
+                }
+            }
+            if(this.snake[0].row > 19 ||this.snake[0].row < 0
+            ||this.snake[0].column > 19 || this.snake[0].column < 0)
+                this.fail()
+        },
+        // 失败
+        fail:function(){
+            this.pauseButton = false
+            clearInterval(this.moveTimer)
+            clearInterval(this.dirTimer)
+            this.failFlag = true
+        },
+        // 暂停
+        pause:function(){
+            this.pauseButton=false
+            clearInterval(this.moveTimer)
+            clearInterval(this.dirTimer)
+            this.moveTimer = null;
+            this.dirTimer = null;
+        },
+        // 重试
+        again:function(){
+            location.reload()
+        },
+        // 模拟按钮的方向转换
+        toBottom:function(){
+            if(this.dir != "top"){
+                this.dir = "down";
+                this.mountSnake();  
+            }               
+        },
+        toUp:function(){
+            if(this.dir != "down"){
+                this.dir = "up";
+                this.mountSnake();  
+            }               
+        },
+        toLeft:function(){
+            if(this.dir != "right"){
+                this.dir = "left";
+                this.mountSnake();  
+            }               
+        },
+        toRight:function(){
+            if(this.dir != "left"){
+                this.dir = "right";
+                this.mountSnake();  
+            }               
+            }
         }
 
-    },
 }
 </script>
 
 
 
 <style lang="scss" scoped>
-.board{
-    margin: 0 auto;
-    width: 582px;
-    height: 582px;
-    flex-flow: row;
-    border: 1px solid black;
-    .commonGrid{
-        float: left;
-        width: 29px;
-        height: 29px;
-        border: 0.5px solid rgb(214, 125, 125);
-
-    }
-}
 .snakeGrid {
   background-color: red;
 }
 .eggGrid {
   background-color: yellow;
 }
-.start{
-    display: block;
+.failBox{
+    text-align: center;
+    img{
+        width: 500px;
+        margin-top: 20px;
+    }
+    .again{
+        display: block;
+        margin: 0 auto;
+    }
+}
+@media screen and(min-width: 992px){
+.board{
     margin: 20px auto;
+    width: 582px;
+    height: 582px;
+    flex-flow: row;
+    border: 1px solid black;
+    position: relative;
+    .commonGrid{
+        float: left;
+        width: 29px;
+        height: 29px;
+        border: 0.5px solid rgb(214, 125, 125);
+    }
+}
+.start,.stop{
+    display: block;
+    width: 104px;
+    position: absolute;
+    left: -20%;
+    margin-top: 20px;
+}
+#score{
+    position: absolute;
+    left: -15%;
+    top:20%
+}  
+}
+@media screen and(max-width: 992px){
+.board{
+    margin: 20px auto;
+    width: 282px;
+    height: 280px;
+    flex-flow: row;
+    border: 1px solid black;
+    position: relative; 
+    .commonGrid{
+        float: left;
+        width: 14px;
+        height: 14px;
+        border: 0.5px solid rgb(214, 125, 125);
+    }
+}
+.start,.stop{
+    display: block;
+    position: absolute;
+    bottom: -50px;
+    width: 104px;
+}
+#score{
+    position: absolute;
+    bottom:-50px;
+    right: 0;
+}
+.failBox{
+    img{
+        width: 100%;
+    }
+}
+// 小屏幕或手机出现控制按钮
+.controlBox{
+    margin: 80px auto;
+    width: 100px;
+    height: 100px;
+    transform: rotate(45deg);
+    position: relative;
+    button{
+        padding: 0;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        transform: rotate(-45deg);
+        margin: 0;
+    }
+    #bottom{
+        right: 0;
+        bottom: 0;
+    }
+    #right{
+        right: 0;
+    }
+    #left{
+        bottom: 0;
+    }
+
+}
 }
 </style>
