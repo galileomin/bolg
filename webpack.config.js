@@ -6,7 +6,7 @@ module.exports={
         output:{
             path:path.join(__dirname,'./dist'),
             filename:'bundle.js',
-            publicPath:'dist/'},
+            publicPath:'../../'},
         plugins:[
             new VueLoaderPlugin(),
             new webpack.ProvidePlugin({
@@ -22,7 +22,14 @@ module.exports={
                 {test:/\.css$/,use:['style-loader','css-loader']},
                 {test:/\.scss$/,use:['style-loader','css-loader','sass-loader']},
                 {test:/\.less$/,use:['style-loader','css-loader','less-loader']},
-                {test:/\.(jpg|png|gif|bmp|jpeg)$/,use:'url-loader'},
+                {test:/\.(jpg|png|gif|bmp|jpeg)$/,use:[
+                    {
+                        loader:'url-loader',
+                        options:{
+                            esModule:false,
+                        }
+                    }
+                ]},
                 {test:/\.(ttf|eot|svg|woff|woff2)$/,use:'url-loader'},
             ]
         }

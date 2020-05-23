@@ -230,7 +230,7 @@ export default {
   background-color: red;
 }
 .eggGrid {
-  background-color: yellow;
+  background-color: black;
 }
 .failBox{
     text-align: center;

@@ -33,7 +33,9 @@ export default {
     methods: {
       intoInfo(id){
         this.$router.push({path:'/infoDetail/'+id})   
-        location.reload()   
+        location.reload()
+        scrollTo(0,0)
+
       },
     getInfo(){
         this.$http.get('https://www.fastmock.site/mock/c7310ac15218c0d05ff986939de48d38/blog/info').then(result =>{
@@ -71,6 +73,7 @@ export default {
         border-radius: 7px 7px 0 0;
         img{
             width: 100%;
+            height: 171px;
             margin-bottom: 8px;
             margin-top: 0;
             border-radius: 7px 7px 0 0;

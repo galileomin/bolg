@@ -38,7 +38,7 @@
           </div>
           <span class="RadioPro">RadioPro</span>
           <br>
-          <img src="/src/img/radio.png" alt="">
+          <img src="../img/radio.png" alt="">
           <br>
           <input type="button" value="进入播单" >
         </div>

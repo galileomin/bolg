@@ -3,7 +3,7 @@
         <div class="commentMana">
             <span >留言板</span>
             <div class="commentCon"> 
-                <img src="/src/img/icon.png" alt="">
+                <img src="../../img/icon.png" alt="">
                 <input type="text" placeholder="输入你的留言吧！" v-model="msg">
                 <button type="button" class="btn btn-info .btn-block" @click="post">发送</button>
             </div>
@@ -11,7 +11,7 @@
             <hr>
             <div style="margin-top:40px" v-for="item in comment" :key="item.id">
                 <div class="board">
-                    <img src="/src/img/icon.png" alt="">
+                    <img src="../../img/icon.png" alt="">
                     <span >{{item.comment}}</span>
                 </div>
                 <span class="time">{{item.date}}</span>
