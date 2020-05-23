@@ -1,20 +1,23 @@
 <template>
 <div class="container">
 <span style="font-size:20px;font-weight:bolder;padding-bottom:5px;display:block">{{title}}</span>
-<div class="swiper-container  class swiper-no-swiping" style="max-width:1140px">
+<div class="swiper-container   " style="max-width:1140px">
     <div class="swiper-wrapper ">
         <div class="swiper-slide info" v-for="item in list" :key="item.id">
-            <img src="/src/img/infoxs1.jpg" alt="">
-            <span class="title">疑似 Surface Headphone 2 曝光，Surface Earbuds 或将共同发布</span> 
+            <a class="intoInfo" href="#">
+            <img :src="item.src" alt="">
+            <span class="title">{{item.title}}</span> 
             <div class="sub">
-                <span class="date">2020-2-2</span>
-                <span>1喜欢</span>
-                <span>1评论</span>             
+                <span class="date">{{item.date}}</span>
+                <span>{{item.like}}喜欢</span>
+                <span>{{item.comment}}评论</span>             
             </div>
+            </a>
         </div>
     </div>
-    <div class="swiper-button-prev swiper-button-black" style="outline:none!important"></div>
-    <div class="swiper-button-next swiper-button-black" style="outline:none!important"></div>
+    <!-- 左右按钮 -->
+    <div class="swiper-button-prev swiper-button-black" s style="outline:none!important;display:none"></div>
+    <div class="swiper-button-next swiper-button-black"  style="outline:none!important"></div>
 </div>
 </div>
 </template>
@@ -44,6 +47,22 @@ methods: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
+            on:{
+                slideChangeTransitionEnd: function(){
+                    if(this.isEnd){
+                        this.navigation.$nextEl.css('display','none')
+                    }else{
+                        this.navigation.$nextEl.css('display','block')
+                    }
+                },
+                slideChangeTransitionStart: function(){
+                    if(this.isBeginning){
+                        this.navigation.$prevEl.css('display','none')
+                    }else{
+                        this.navigation.$prevEl.css('display','block')
+                    }
+                },                         
+            },
             breakpoints:{
                 1200:{
                     slidesPerView:5,
@@ -69,10 +88,18 @@ mounted() {
 </script>
 
 <style lang="scss" scoped>
+// a标签链接
+.intoInfo{
+    color: inherit;
+    text-decoration: none;
+}
 .container{
     padding: 0;
+
     // 大屏幕
     .swiper-container{ 
+        --swiper-navigation-size: 40px;
+        --swiper-navigation-color: #00ff33;
         .info{
             height: 200px;
             background-color: white;
