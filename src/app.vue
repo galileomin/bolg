@@ -19,6 +19,7 @@
         <router-link to="/info" tag="li" role="presentation"><a>资讯</a></router-link>
         <router-link to="/video" tag="li" role="presentation"><a>视频</a></router-link>
         <li><a href="#">文章</a></li>
+        <router-link to="/game" tag="li" role="presentation"><a>小游戏</a></router-link>
       </ul>
       <form class="navbar-form navbar-right ">
         <div class="form-group">

@@ -73,7 +73,7 @@ methods: {
                     spaceBetween:15    
                 },
                 1:{
-                    slidesPerView:1,
+                    slidesPerView:2,
                     spaceBetween:15    
                 }
             }
@@ -95,8 +95,6 @@ mounted() {
 }
 .container{
     padding: 0;
-
-    // 大屏幕
     .swiper-container{ 
         --swiper-navigation-size: 40px;
         --swiper-navigation-color: #00ff33;
@@ -132,8 +130,7 @@ mounted() {
             padding-right: 5px;
         }
      }
-    }
-    // 小屏幕
+    }       
 }
 
 </style>

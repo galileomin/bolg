@@ -2,7 +2,9 @@ import VueRouter from 'vue-router'
 import home from './components/home.vue'
 import info from './components/info.vue'
 import video from './components/video.vue'
+import game from './components/game.vue'
 import infoDetail from './components/infoDetail.vue'
+
 const router = new VueRouter({
     routes:[
         {path:'/home',component:home},
@@ -10,6 +12,7 @@ const router = new VueRouter({
         {path:'/info',component:info},
         {path:'/info',component:video},
         {path:'/infoDetail/:id',component:infoDetail},
+        {path:'/game',component:game}
     ]
 })
 
