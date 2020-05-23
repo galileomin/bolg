@@ -255,7 +255,6 @@ export default {
         float: left;
         width: 29px;
         height: 29px;
-        border: 0.5px solid rgb(214, 125, 125);
     }
 }
 .start,.stop{
@@ -283,7 +282,6 @@ export default {
         float: left;
         width: 14px;
         height: 14px;
-        border: 0.5px solid rgb(214, 125, 125);
     }
 }
 .start,.stop{
