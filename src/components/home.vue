@@ -40,7 +40,10 @@
           <br>
           <img src="../img/radio.png" alt="">
           <br>
-          <input type="button" value="进入播单" >
+          <input type="button" value="进入播单" @click="dialogVisible = true" >
+          <el-dialog  width="400px"  :visible.sync="dialogVisible"  :show-close=false>
+            <player></player>
+          </el-dialog>
         </div>
       </div>
     </div>
@@ -60,6 +63,7 @@
 import show from './sub/show.vue'
 import toTop from './sub/toTop.vue'
 import infoxs  from './sub/info_xs.vue'
+import musicPlayer from './sub/musicPlayer.vue'
 $(function(){ 
   $('.carousel').carousel({
 		interval: 4000
@@ -70,6 +74,7 @@ export default {
       return {
         newInfoList:[],
         infoName:'资讯',
+        dialogVisible: false
       }
     },
     methods:{
@@ -89,12 +94,13 @@ export default {
     components:{
       'show':show,
       'toTop':toTop,
-      'infoxs':infoxs
+      'infoxs':infoxs,
+      'player':musicPlayer
     }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
     // l轮播
     .tuijian{
       background-color: brown;
@@ -144,6 +150,22 @@ export default {
       input:hover{
          background-color: rgba(0,0,0,0.3);
       }
+      // 页面播放器
+      .el-dialog__wrapper{
+        background-color: rgba(0,0,0,0.1);
+        overflow: hidden;
+        .el-dialog{
+          background-color: lightcyan;
+          border-radius: 5px;
+          .el-dialog__header{
+            display: none;
+          }
+          .el-dialog__body{
+            padding: 0 0 0 0;
+          }
+        }
+      }
+      //
       .intoCollection{
         display: flex;
         justify-content: space-between;

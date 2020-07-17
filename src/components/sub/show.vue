@@ -33,7 +33,6 @@ export default {
     methods: {
       intoInfo(id){
         this.$router.push({path:'/infoDetail/'+id})   
-        location.reload()
         scrollTo(0,0)
 
       },
@@ -42,7 +41,7 @@ export default {
             this.infoList=result.body.message
         })
     },
-}
+},
 }
 </script>
 

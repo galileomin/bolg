@@ -4,9 +4,10 @@ const { VueLoaderPlugin } = require('vue-loader');
 module.exports={
         entry:path.join(__dirname,'./src/main.js'),
         output:{
-            path:path.join(__dirname,'./dist'),
+            path:path.join(__dirname,'dist'),
             filename:'bundle.js',
-            publicPath:'../../'},
+            // publicPath:'../../'
+        },
         plugins:[
             new VueLoaderPlugin(),
             new webpack.ProvidePlugin({
