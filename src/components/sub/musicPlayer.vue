@@ -5,9 +5,9 @@
              <span>我的播单</span>
          </el-header>
          <el-main style="width:400px">
-             <el-container class="music-item" v-for="item in musicList" :key="item.id">
+             <el-container class="music-item" @dblclick.native="clicktoPlay($event)" v-for="item in musicList" :key="item.id" :data-key="item.id">
                  <el-aside style="width:50px;padding:4px 0 0 10px">
-                    <img src="../../img/3.jpg" alt="">
+                    <img :src="item.img" alt="">
                  </el-aside>
                  <el-aside>
                     <span>{{item.name}}</span>
@@ -18,12 +18,12 @@
          <el-container class="footer">
             <el-aside style="width:300px" class="musicInfo">
                 <span class="icon  el-icon-stopwatch " ></span>
-                <span class="name">这里是歌名</span>
+                <span class="name"></span>
             </el-aside>
             <el-aside style="width:100px" class="btnCon">
-                <span  class="el-icon-video-play" @click="play"></span>
-                <span  class="el-icon-video-pause" @click="pause" style="display:none" ></span>
-                <span  class="el-icon-d-arrow-right"></span>
+                <span  class="el-icon-video-play" @click="play" id="controller"></span>
+                <span  class="el-icon-d-arrow-right" @click="next"></span>
+                <audio  id="audio"></audio>
             </el-aside>
          </el-container>
      </el-container>
@@ -35,27 +35,79 @@ export default {
     data() {
         return {
             musicList:[],
+            musics:[],
+            playing:false,
+            selecting:0,
+            names:[]
         }
     },
     created() {
         this.getmusicList()
     },
     methods: {
+        // 暂停or播放
         play(){
-           $(".el-icon-video-play").css('display','none')
-           $(".el-icon-video-pause").css('display','block')
-           $(".icon").addClass("playing")
+            if($("#audio").attr('src') == undefined){
+                $("#audio").attr('src',this.musics[this.selecting])
+                $(".name").text(this.names[this.selecting])
+                
+            }
+            let audio = document.getElementById("audio")
+            this.judgePlaying()
         },
-        pause(){
-           $(".el-icon-video-pause").css('display','none')
-           $(".el-icon-video-play").css('display','block') 
-           $(".icon").removeClass("playing")
-
+        // 下一首
+        next(){
+            // 
+            if($("#audio").attr('src') == undefined){
+                $("#audio").attr('src',this.musics[this.selecting])
+                $(".name").text(this.names[this.selecting])
+                this.playing =false
+                this.judgePlaying()
+            }else{
+                if(this.selecting == (this.musics.length-1)){
+                    this.selecting = 0
+                }else{
+                    this.selecting+=1
+                }
+            $("#audio").attr('src',this.musics[this.selecting])
+            $(".name").text(this.names[this.selecting])
+            this.playing =false
+            this.judgePlaying()
+            }
         },
+        // 取得数据
         getmusicList(){
             this.$http.get("https://www.fastmock.site/mock/c7310ac15218c0d05ff986939de48d38/blog/musicList").then(result =>{
                 this.musicList=result.body.message;
+                this.musicList.forEach(item => {
+                    this.musics.push(item.src)
+                    this.names.push(item.name)
+                });
             })
+        },
+        // 双击自定播放
+        clicktoPlay(e){
+           var key = e.currentTarget.dataset.key-1
+           console.log(key)
+            this.selecting = key
+             $("#audio").attr('src',this.musics[this.selecting])
+            $(".name").text(this.names[this.selecting])
+            this.playing =false
+            this.judgePlaying()
+        },
+        // 开始暂停按钮状态的判断
+        judgePlaying(){
+            if(this.playing == false){
+                $("#controller").removeClass("el-icon-video-play")
+                $("#controller").addClass("el-icon-video-pause")
+                this.playing = true
+                audio.play()
+            }else{
+                $("#controller").removeClass("el-icon-video-pause")
+                $("#controller").addClass("el-icon-video-play")
+                this.playing = false
+                audio.pause()
+            }
         }
     },
 }
@@ -96,6 +148,10 @@ div{
             .music-item:hover{
                 background-color: #eee;
             }
+            // 播放中样式
+            .playing{
+                background-color: #ccc;
+            }
         }
         // 控制栏
         .footer{
@@ -125,23 +181,19 @@ div{
                 font-size: 34px;
                 display: flex;
                 overflow: hidden;
+                justify-content: space-around;
                 span{
                     display: block;
+                    width: 80px;
+                    
                 }
                 .icon{
                     width: 34px;
                     height: 34px;
-                    margin: 3px 20px 3px 10px;
+                    margin: 3px 5px 3px 5px;
                 }
-                .playing{
-                    animation: circle 2s infinite linear;
-                }
-                @keyframes circle {
-                  from {transform: rotate(0deg);}
-                  to{transform: rotate(360deg);}
-                }
-                span:last-child{
-                    font-size: 16px;
+                .name{
+                    font-size: 13px;
                     line-height: 40px;
                 }
 
